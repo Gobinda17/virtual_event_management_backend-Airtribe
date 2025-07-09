@@ -5,6 +5,6 @@ const router = require("./routes/userRoutes");
 
 app.use(express.json());
 
-app.use("/event-management/api/v1/user", router);
+app.use("/event-management/api/v1", router);
 
 module.exports = app;
