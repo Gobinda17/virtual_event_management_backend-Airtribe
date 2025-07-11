@@ -1,28 +1,24 @@
-const { validationResult } = require('express-validator');
+
 
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const JWT_SECRET = process.env.JWT_SECRET;
+const JWT_EXPIRATION = process.env.JWT_EXPIRATION;
 const saltrounds = 10;
 
 const User = require('../models/userSchema');
+const tokenList = require('../storeTokenVerification');
 
 class UserController {
 
+    #generateJWT = (userId, role) => {
+        return jwt.sign({ userId: userId, userRole: role }, JWT_SECRET, { expiresIn: JWT_EXPIRATION });
+    }
+
     signUp = async (req, res) => {
         try {
-            const validation = validationResult(req);
             const { role } = req.params;
-
-            if (!validationResult) {
-                console.error("❌ Validation Failed");
-                return res.status(400).json({ status: 'fail', message: validation.array() });
-            }
-
-            if (!['user', 'organiser'].includes(role)) {
-                return res.status(400).json({ status: 'fail', message: 'Inavlid role specified' });
-            }
 
             const { name, email, phone, password } = req.body;
 
@@ -37,18 +33,74 @@ class UserController {
             return res.status(201).json({ status: 'success', message: '✅ User Created.' });
 
         } catch (error) {
-            console.error(error);
+            return res.status(400).json({
+                status: 'fail',
+                message: `${error}`
+            })
         }
     };
 
     loginUser = async (req, res) => {
         try {
-            console.log(req);
-        } catch(error) {
-            return res.status(500).json({
+            const { email, password } = req.body;
+
+            const userExist = await User.findOne({ email: email });
+
+            if (!userExist) {
+                return res.status(404).json({
+                    status: 'fail',
+                    message: "Eamil not found."
+                });
+            }
+
+            const passwordMatch = await bcrypt.compare(password, userExist.password);
+
+            if (!passwordMatch) {
+                return res.status(401).json({
+                    status: 'fail',
+                    message: 'Invalid Password.'
+                });
+            }
+
+            const jsonWebToken = this.#generateJWT(userExist._id, userExist.role);
+
+            return res.status(200).json({
+                status: 'success',
+                message: "Login successful.",
+                token: jsonWebToken,
+            });
+        } catch (error) {
+            return res.status(400).json({
                 status: 'fail',
-                message: "Internal Server Error"
-            })
+                message: `${error}`
+            });
+        }
+    };
+
+    logoutUser = async (req, res) => {
+        try {
+            const authHeader = req.headers.authorization;
+
+            if (!authHeader) {
+                return res.status(401).json({
+                    status: 'error',
+                    error: 'Unauthorized access'
+                });
+            }
+
+            const token = authHeader.split(' ')[1];
+
+            tokenList.add(token);
+
+            return res.status(200).json({
+                status: 'success',
+                message: 'Logout Successfully'
+            });
+        } catch (error) {
+            return res.status(400).json({
+                status: 'fail',
+                message: `${error}`
+            });
         }
     }
 }

@@ -1,4 +1,4 @@
-const { body } = require("express-validator");
+const { body, param } = require("express-validator");
 
 const registrationValidation = [
     body('name').notEmpty().withMessage('Name is required.'),
@@ -8,4 +8,17 @@ const registrationValidation = [
     param('role').isIn(['user', 'organiser']).withMessage('Role must be either "user" or "organiser"')
 ];
 
-module.exports = registrationValidation;
+const loginValidation = [
+    body('email').isEmail().notEmpty().withMessage('Email is invalid.' || 'Email is required.'),
+    body('password').notEmpty().withMessage('Password is required.'),
+    param('role').isIn(['user', 'organiser']).withMessage('Role must be either "user" or "organiser')
+];
+
+const eventValidation = [
+    body('title').notEmpty().withMessage('Title is reuuired.'),
+    body('description').notEmpty().withMessage('Description is required.'),
+    body('date').isDate().notEmpty().withMessage('Invalid Date.' || 'Date is required.'),
+    body('time').notEmpty().withMessage('Time is required.'),
+]
+
+module.exports = { registrationValidation, loginValidation, eventValidation };
