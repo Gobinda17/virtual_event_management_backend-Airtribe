@@ -8,7 +8,7 @@ const JWT_EXPIRATION = process.env.JWT_EXPIRATION;
 const saltrounds = 10;
 
 const User = require('../models/userSchema');
-let tokenList = require('../storeTokenVerification.js');
+let tokenList = require('../storeBlacklistedToken.js');
 
 class UserController {
 

@@ -6,7 +6,7 @@ const JWT_SECRET = process.env.JWT_SECRET;
 const Event = require('../models/eventSchema');
 
 // Have use a in-memory Structure to store the token
-const tokenList = require('../storeTokenVerification');
+const tokenList = require('../storeBlacklistedToken');
 
 class EventMiddleware {
 

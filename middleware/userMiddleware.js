@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 
 const JWT_SECRET = process.env.JWT_SECRET;
 const User = require('../models/userSchema');
-const tokenList = require('../storeTokenVerification.js');
+const tokenList = require('../storeBlacklistedToken.js');
 
 class UserMiddleware {
 
