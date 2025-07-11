@@ -8,7 +8,7 @@ const JWT_EXPIRATION = process.env.JWT_EXPIRATION;
 const saltrounds = 10;
 
 const User = require('../models/userSchema');
-const tokenList = require('../storeTokenVerification');
+let tokenList = require('../storeTokenVerification.js');
 
 class UserController {
 
@@ -81,13 +81,6 @@ class UserController {
         try {
             const authHeader = req.headers.authorization;
 
-            if (!authHeader) {
-                return res.status(401).json({
-                    status: 'error',
-                    error: 'Unauthorized access'
-                });
-            }
-
             const token = authHeader.split(' ')[1];
 
             tokenList.add(token);
@@ -102,7 +95,7 @@ class UserController {
                 message: `${error}`
             });
         }
-    }
+    };
 }
 
 module.exports = new UserController();

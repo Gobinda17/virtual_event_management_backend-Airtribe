@@ -15,10 +15,10 @@ const loginValidation = [
 ];
 
 const eventValidation = [
-    body('title').notEmpty().withMessage('Title is reuuired.'),
+    body('title').notEmpty().withMessage('Title is required.'),
     body('description').notEmpty().withMessage('Description is required.'),
     body('date').isDate().notEmpty().withMessage('Invalid Date.' || 'Date is required.'),
     body('time').notEmpty().withMessage('Time is required.'),
-]
+];
 
 module.exports = { registrationValidation, loginValidation, eventValidation };

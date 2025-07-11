@@ -1,6 +1,9 @@
 const { validationResult } = require('express-validator');
+const jwt = require('jsonwebtoken');
 
+const JWT_SECRET = process.env.JWT_SECRET;
 const User = require('../models/userSchema');
+const tokenList = require('../storeTokenVerification.js');
 
 class UserMiddleware {
 
@@ -17,7 +20,7 @@ class UserMiddleware {
         const token = authHeader.split(' ')[1];
 
         // To check for Blacklisted Token
-        if (!tokenList.has(token)) {
+        if (tokenList.has(token)) {
             return res.status(400).json({
                 status: 'error',
                 error: 'Invalid Token'
@@ -86,7 +89,7 @@ class UserMiddleware {
 
             const userExist = await User.findOne({ _id: verifiedUser.userId });
 
-            if (userExist) {
+            if (!userExist) {
                 return res.status(401).json({
                     status: 'fail',
                     message: 'User invalid.'
@@ -100,7 +103,7 @@ class UserMiddleware {
                 message: `${error}`
             });
         }
-    }
+    };
 }
 
 module.exports = new UserMiddleware();

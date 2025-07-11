@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 
 const router = require("./routes/userRoutes");
-const eventRouter = require('./routes/evenRoutes');
+const eventRouter = require('./routes/eventRoutes');
 
 app.use(express.json());
 

@@ -3,7 +3,6 @@ const { validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
 const JWT_SECRET = process.env.JWT_SECRET;
 
-const User = require('../models/userSchema');
 const Event = require('../models/eventSchema');
 
 // Have use a in-memory Structure to store the token
@@ -45,13 +44,11 @@ class EventMiddleware {
         return decodedUser;
     };
 
-    validateUserToCreateEvents = async (req, res, next) => {
+    validateUserToCreateEvents = (req, res, next) => {
         try {
             const verifiedUser = this.#verifyUser(req, res);
 
-            const userExist = await User.findOne({ role: verifiedUser.userRole === 'organiser' ? 'organiser' : '' });
-            
-            if (!userExist) {
+            if (verifiedUser.userRole !== 'organiser') {
                 return res.status(401).json({
                     status: 'fail',
                     message: 'User not found with this role'
@@ -109,7 +106,28 @@ class EventMiddleware {
                 message: `${error}`
             });
         }
-    }
+    };
+
+    validateUserToGetEvents = (req, res, next) => {
+        try {
+            const verifiedUser = this.#verifyUser(req, res);
+
+            if (!verifiedUser) {
+                return res.status(401).json({
+                    status: 'fail',
+                    message: 'User not found.'
+                });
+            }
+
+            req.user = verifiedUser;
+            next();
+        } catch (error) {
+            return res.status(401).json({
+                status: 'fail',
+                message: `${error}`
+            });
+        }
+    };
 }
 
 module.exports = new EventMiddleware();

@@ -1,3 +1,3 @@
-const tokenLists = new Set();
+let tokenLists = new Set();
 
 module.exports = tokenLists;

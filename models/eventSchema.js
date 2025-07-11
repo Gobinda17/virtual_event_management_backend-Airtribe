@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const eventSchema = new mongoose.Schema({
     title: {
         type: String,
-        requried: true,
+        required: true,
         trim: true
     },
 
@@ -20,7 +20,7 @@ const eventSchema = new mongoose.Schema({
 
     time: {
         type: String,
-        requried: true
+        required: true
     },
 
     location: {
