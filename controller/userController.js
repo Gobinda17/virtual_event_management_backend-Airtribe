@@ -40,6 +40,17 @@ class UserController {
             console.error(error);
         }
     };
+
+    loginUser = async (req, res) => {
+        try {
+            console.log(req);
+        } catch(error) {
+            return res.status(500).json({
+                status: 'fail',
+                message: "Internal Server Error"
+            })
+        }
+    }
 }
 
 module.exports = new UserController();
