@@ -2,8 +2,10 @@
 
 This project is a **Node.js + Express.js** backend for managing virtual events. It supports:
 
-- User & Organizer Registration/Login with JWT Authentication
-- Event Creation, Updating, Deletion (Organizers only)
+- User & Organiser Registration/Login with JWT Authentication 
+- `['user', 'organiser']` are the roles that are predefined
+- Added a role base `register` and `login` as can been seen in many webistes
+- Event Creation, Updating, Deletion (Organisers only)
 - Event Registration for Attendees
 - Email confirmation via **Ethereal Email (Nodemailer)**
 
@@ -87,21 +89,21 @@ Ethereal is used for **testing emails** in development.
 
 ### 🔑 Authentication
 
-| Method | Endpoint                                        | Description                | Auth Required | Body Parameters                     |
-| ------ | ----------------------------------------------- | -------------------------- | ------------- | ----------------------------------- |
-| POST   | `/event-management/api/v1/register/:role`       | Register user or organizer | ❌            | `name`, `email`, `phone`,`password` |
-| POST   | `/event-management/api/v1/login/:role`          | Login user or organizer    | ❌            | `email`, `password`                 |
-| POST   | `/event-management/api/v1/logout`               | Logout & blacklist JWT     | ✅            | ❌                                  |
+| Method | Endpoint                                        | Description                | Auth Required | Role Required           | Body Parameters                     |
+| ------ | ----------------------------------------------- | -------------------------- | ------------- | ----------------------- | ----------------------------------- |
+| POST   | `/event-management/api/v1/register/:role`       | Register user or organiser | ❌            | `user` or `organiser`   | `name`, `email`, `phone`,`password` |
+| POST   | `/event-management/api/v1/login/:role`          | Login user or organiser    | ❌            | `user` or `organiser`   | `email`, `password`                 |
+| POST   | `/event-management/api/v1/logout`               | Logout & blacklist JWT     | ✅            | ❌                      | ❌                                  |
 
 ### 🎫 Events
 
-| Method | Endpoint                                              | Description                       | Auth Required | Role Required | Body Parameters                              |
-| ------ | ----------------------------------------------------- | --------------------------------- | ------------- | ------------- | -------------------------------------------- |
-| POST   | `/event-management/api/v1/service/event`              | Create new event                  | ✅            | `organizer`   | `title`, `description`, `date`, `time`, etc. |
-| GET    | `/event-management/api/v1/service/event`              | Get all events                    | ✅            | ❌           | ❌                                           |
-| PUT    | `/event-management/api/v1/service/event/:id`          | Update an existing event by ID    | ✅            | `organizer`   | Partial or full event data                   |
-| DELETE | `/event-management/api/v1/service/event/:id`          | Delete an event by ID             | ✅            | `organizer`   | ❌                                           |
-| POST   | `/event-management/api/v1/service/event/:id/register` | Register for an event by event ID | ✅            | `user`        | (gets user info from JWT)                    |
+| Method | Endpoint                                              | Description                          | Auth Required | Role Required | Body Parameters                              |
+| ------ | ----------------------------------------------------- | ------------------------------------ | ------------- | ------------- | -------------------------------------------- |
+| POST   | `/event-management/api/v1/service/event`              | Create new event                     | ✅            | `organiser`   | `title`, `description`, `date`, `time`, etc. |
+| GET    | `/event-management/api/v1/service/event`              | Get all events for very kind of user | ✅            | ❌           | ❌                                           |
+| PUT    | `/event-management/api/v1/service/event/:id`          | Update an existing event by ID       | ✅            | `organiser`   | Partial or full event data                   |
+| DELETE | `/event-management/api/v1/service/event/:id`          | Delete an event by ID                | ✅            | `organiser`   | ❌                                           |
+| POST   | `/event-management/api/v1/service/event/:id/register` | Register for an event by event ID    | ✅            | `user`        | (gets user info from JWT)                    |
 
 ---
 
