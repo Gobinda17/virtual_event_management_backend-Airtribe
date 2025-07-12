@@ -18,7 +18,14 @@ class UserController {
 
     signUp = async (req, res) => {
         try {
-            const { role } = req.params;
+            const role = req.params.role;
+
+            if (!['user', 'organiser'].includes(role)) {
+                return res.status(400).json({
+                    status: 'fail',
+                    message: 'Role is invalid.'
+                });
+            }
 
             const { name, email, phone, password } = req.body;
 
@@ -30,13 +37,13 @@ class UserController {
 
             await newUser.save();
 
-            return res.status(201).json({ status: 'success', message: '✅ User Created.' });
+            return res.status(200).json({ status: 'success', message: '✅ User Created.' });
 
         } catch (error) {
             return res.status(400).json({
                 status: 'fail',
                 message: `${error}`
-            })
+            });
         }
     };
 

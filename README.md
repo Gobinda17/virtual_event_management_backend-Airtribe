@@ -87,21 +87,21 @@ Ethereal is used for **testing emails** in development.
 
 ### 🔑 Authentication
 
-| Method | Endpoint                 | Description                | Auth Required | Body Parameters             |
-| ------ | ------------------------ | -------------------------- | ------------- | --------------------------- |
-| POST   | `/api/v1/register/:role` | Register user or organizer | ❌            | `name`, `email`, `password` |
-| POST   | `/api/v1/login`          | Login user or organizer    | ❌            | `email`, `password`         |
-| POST   | `/api/v1/logout`         | Logout & blacklist JWT     | ✅            | ❌                          |
+| Method | Endpoint                                  | Description                | Auth Required | Body Parameters             |
+| ------ | ----------------------------------------- | -------------------------- | ------------- | --------------------------- |
+| POST   | `/event-management/api/v1/register/:role` | Register user or organizer | ❌            | `name`, `email`, `password` |
+| POST   | `/event-management/api/v1/login`          | Login user or organizer    | ❌            | `email`, `password`         |
+| POST   | `/event-management/api/v1/logout`         | Logout & blacklist JWT     | ✅            | ❌                          |
 
 ### 🎫 Events
 
-| Method | Endpoint                     | Description                       | Auth Required | Role Required | Body Parameters                              |
-| ------ | ---------------------------- | --------------------------------- | ------------- | ------------- | -------------------------------------------- |
-| GET    | `/api/v1/event`              | Get all events                    | ✅            | ❌            | ❌                                           |
-| POST   | `/api/v1/event`              | Create new event                  | ✅            | `organizer`   | `title`, `description`, `date`, `time`, etc. |
-| PUT    | `/api/v1/event/:id`          | Update an existing event by ID    | ✅            | `organizer`   | Partial or full event data                   |
-| DELETE | `/api/v1/event/:id`          | Delete an event by ID             | ✅            | `organizer`   | ❌                                           |
-| POST   | `/api/v1/event/:id/register` | Register for an event by event ID | ✅            | `user`        | (gets user info from JWT)                    |
+| Method | Endpoint                                              | Description                       | Auth Required | Role Required | Body Parameters                              |
+| ------ | ----------------------------------------------------- | --------------------------------- | ------------- | ------------- | -------------------------------------------- |
+| POST   | `/event-management/api/v1/service/event`              | Create new event                  | ✅            | `organizer`   | `title`, `description`, `date`, `time`, etc. |
+| GET    | `/event-management/api/v1/service/event`              | Get all events                    | ✅            | ❌           | ❌                                           |
+| PUT    | `/event-management/api/v1/service/event/:id`          | Update an existing event by ID    | ✅            | `organizer`   | Partial or full event data                   |
+| DELETE | `/event-management/api/v1/service/event/:id`          | Delete an event by ID             | ✅            | `organizer`   | ❌                                           |
+| POST   | `/event-management/api/v1/service/event/:id/register` | Register for an event by event ID | ✅            | `user`        | (gets user info from JWT)                    |
 
 ---
 
@@ -132,6 +132,12 @@ You’ll get a preview link like:
 🔗 Preview URL: https://ethereal.email/message/YOUR-MESSAGE-ID
 ```
 
+### 5. Run the test
+
+```bash
+npm run test
+```
+
 ---
 
 ## 📂 Project Structure
@@ -146,6 +152,8 @@ You’ll get a preview link like:
 │   └── userSchema.js, eventSchema.js
 ├── routes/
 │   └── userRoutes.js, eventRoutes.js
+├── test/
+│   └── serverTests.js
 ├── utils/
 │   └── sendMail.js
 ├── .env

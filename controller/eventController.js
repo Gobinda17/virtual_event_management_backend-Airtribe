@@ -25,7 +25,8 @@ class EventController {
 
             return res.status(200).json({
                 status: 'success',
-                message: "Event Created."
+                message: "Event Created.",
+                event: newEvent
             });
 
         } catch (error) {
@@ -72,7 +73,8 @@ class EventController {
 
             return res.status(200).json({
                 status: 'success',
-                message: 'Event Updated Successfully'
+                message: 'Event Updated Successfully',
+                event: updatedEvent
             });
         } catch (error) {
             return res.status(401).json({

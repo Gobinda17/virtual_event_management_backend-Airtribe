@@ -1,0 +1,80 @@
+TAP version 14
+✅ In-memory MongoDB connected for tests
+# Subtest: POST /event-management/api/v1/register/:role
+    ok 1 - should be equal
+    1..1
+ok 1 - POST /event-management/api/v1/register/:role # time=152.225ms
+
+# Subtest: POST /event-management/api/v1/register/:role
+    ok 1 - should be equal
+    1..1
+ok 2 - POST /event-management/api/v1/register/:role # time=85.069ms
+
+# Subtest: POST /event-management/api/v1/register/:role with invalid role
+    ok 1 - should be equal
+    1..1
+ok 3 - POST /event-management/api/v1/register/:role with invalid role # time=8.043ms
+
+# Subtest: POST /event-management/api/v1/register/:role with missing email
+    ok 1 - should be equal
+    1..1
+ok 4 - POST /event-management/api/v1/register/:role with missing email # time=6.537ms
+
+# Subtest: POST /event-management/api/v1/login/:role
+    ok 1 - should be equal
+    ok 2 - specified property should be defined own property
+    1..2
+ok 5 - POST /event-management/api/v1/login/:role # time=84.778ms
+
+# Subtest: POST /event-management/api/v1/login/:role
+    ok 1 - should be equal
+    ok 2 - specified property should be defined own property
+    1..2
+ok 6 - POST /event-management/api/v1/login/:role # time=83.54ms
+
+# Subtest: POST /event-management/api/v1/login/:role with wrong password
+    ok 1 - should be equal
+    1..1
+ok 7 - POST /event-management/api/v1/login/:role with wrong password # time=79.828ms
+
+# Subtest: POST /event-management/api/v1/login/:role with wrong email
+    ok 1 - should be equal
+    1..1
+ok 8 - POST /event-management/api/v1/login/:role with wrong email # time=8.141ms
+
+# Subtest: GET /event-management/api/v1/service/event
+    ok 1 - should be equal
+    ok 2 - specified property should be defined own property
+    1..2
+ok 9 - GET /event-management/api/v1/service/event # time=11.325ms
+
+# Subtest: POST /event-management/api/v1/service/event
+    ok 1 - should be equal
+    1..1
+ok 10 - POST /event-management/api/v1/service/event # time=15.725ms
+
+# Subtest: POST /event-management/api/v1/service/event without token
+    ok 1 - should be equal
+    1..1
+ok 11 - POST /event-management/api/v1/service/event without token # time=7.377ms
+
+# Subtest: PUT /event-management/api/v1/service/event/:id
+    ok 1 - should be equal
+    1..1
+ok 12 - PUT /event-management/api/v1/service/event/:id # time=29.199ms
+
+# Subtest: DELETE /event-management/api/v1/service/event/:id
+    ok 1 - should be equal
+    1..1
+ok 13 - DELETE /event-management/api/v1/service/event/:id # time=21.943ms
+
+# Subtest: POST /event-management/api/v1/service/event/:id/register
+    ok 1 - Event should be created successfully
+    ok 2 - User login should succeed
+📨 Email sent: <93f6b4c8-c4ba-5f47-3bef-23c3e44269f9@example.com>
+🔗 Preview URL: https://ethereal.email/message/aHFidF3J7St9hPY2aHKg4icY8niTmbQ5AAAABMETtZyg04x84clouYGKS2A
+    ok 3 - User should register for the event
+    1..3
+ok 14 - POST /event-management/api/v1/service/event/:id/register # time=4563.754ms
+
+1..14
