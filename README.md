@@ -20,7 +20,7 @@ This project is a **Node.js + Express.js** backend for managing virtual events. 
 - bcrypt for Password Hashing
 - express-validator for Input Validation
 - Nodemailer with Ethereal Email (for development email testing)
-- Userd in-memory data structure to store blaclisted JWT after successfull logout (tied to mock the Redis which casn be used for caching blacklisted JWT)
+- Userd in-memory data structure to store blaclisted JWT after successfull logout (tried to mock **Redis** which can be used for storing and blacklist JWT)
 
 ---
 
