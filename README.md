@@ -46,6 +46,8 @@ PORT=3001
 MONGO_URI=mongodb://localhost:27017/eventdb
 JWT_SECRET=your_jwt_secret
 JWT_EXPIRES_IN=1h
+MAIL_USER=Ethereal Mail ID
+MAIL_PASSKEY=Ethereal Mail Password
 ```
 
 ### 4. Start the server
