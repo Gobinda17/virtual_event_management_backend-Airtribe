@@ -81,7 +81,8 @@ Ethereal is used for **testing emails** in development.
 | `PORT`           | Server port (default: 3001)        |
 | `MONGO_URI`      | MongoDB connection string          |
 | `JWT_SECRET`     | Secret key for signing JWT         |
-| `JWT_EXPIRES_IN` | JWT expiration time (e.g., 1h, 7d) |
+| `MAIL_USER`      | Ethereal Mail ID                   |
+| `MAIL_PASSKEY`   | Ethereal Mail Password             |
 
 ---
 
