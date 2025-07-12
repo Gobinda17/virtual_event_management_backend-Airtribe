@@ -87,11 +87,11 @@ Ethereal is used for **testing emails** in development.
 
 ### 🔑 Authentication
 
-| Method | Endpoint                                  | Description                | Auth Required | Body Parameters             |
-| ------ | ----------------------------------------- | -------------------------- | ------------- | --------------------------- |
-| POST   | `/event-management/api/v1/register/:role` | Register user or organizer | ❌            | `name`, `email`, `password` |
-| POST   | `/event-management/api/v1/login`          | Login user or organizer    | ❌            | `email`, `password`         |
-| POST   | `/event-management/api/v1/logout`         | Logout & blacklist JWT     | ✅            | ❌                          |
+| Method | Endpoint                                        | Description                | Auth Required | Body Parameters                     |
+| ------ | ----------------------------------------------- | -------------------------- | ------------- | ----------------------------------- |
+| POST   | `/event-management/api/v1/register/:role`       | Register user or organizer | ❌            | `name`, `email`, `phone`,`password` |
+| POST   | `/event-management/api/v1/login/:role`          | Login user or organizer    | ❌            | `email`, `password`                 |
+| POST   | `/event-management/api/v1/logout`               | Logout & blacklist JWT     | ✅            | ❌                                  |
 
 ### 🎫 Events
 
